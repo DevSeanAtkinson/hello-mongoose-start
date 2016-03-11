@@ -2,7 +2,6 @@ var express = require('express'),
     logger  = require('morgan')('dev'),
     path    = require('path'),
     mongoose = require('mongoose'),
-<<<<<<< HEAD
     Schema = mongoose.Schema,
     bodyParser = require('body-parser'),
     server  = express();
@@ -22,30 +21,6 @@ var todoSchema = new Schema ({
 });
 
 var Todo = mongoose.model('Todo', todoSchema);
-=======
-    Schema  = mongoose.Schema,
-    bodyParser = require('body-parser'),
-    server  = express();
-
-//Todo Model
-var todoSchema = new Schema({
-  desc: {
-    type: String,
-    required: true
-  },
-  completed: {
-    type: Boolean,
-    required: true
-  }
-});
-
-var Todo = mongoose.model('Todo', todoSchema);
-
-
-//create a connection to our db
-mongoose.connect('mongodb://localhost/todoApp');
-var port = process.env.PORT || 9000;
->>>>>>> 45efec1113ffbe81e0bd11f91dde21974a51da0e
 
 server.use(express.static(path.join(__dirname,'public')));
 server.use(logger);
