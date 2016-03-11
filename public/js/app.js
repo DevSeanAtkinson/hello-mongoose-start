@@ -6,8 +6,30 @@ angular.module('todoApp', [
 angular.module('todoApp') //this is the getter syntax, we can use this so we don't have to make a variable to store our angular application; YAYYY no globals
       .controller('TodoController', TodoController);
 
-TodoContoller.$inject = ['$scope', '$http'];
+TodoController.$inject = ['$scope', '$http'];
 
 function TodoController($scope, $http){
+  $scope.todos=[];
+  initTodos();
+//create a new todo
+$scope.saveTodo=function(){
+    $http.post('/api/todos', $scope.newTodo)
+    .then(function(response){
+      initTodos();
+      $scope.newTodo = {};
+    })
+    .catch(function(err){
+      console.err(err);
+    });
+}
 
+  function initTodos(){
+    $http.get('/api/todos')
+      .then(function(response){
+        $scope.todos = response.data;
+      })
+      .catch(function(err){
+        console.err(err);
+      });
+  }
 }
